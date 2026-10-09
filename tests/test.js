@@ -716,6 +716,11 @@ suite('CBOR basic tests', function(){
 		deserialized = decode(serialized)
 		assert.isTrue(deserialized.bigger > 2n**65n)
 	})
+	test('bigint at the 64-bit limits', function(){
+		assert.equal(encode(2n**64n - 1n).toString('hex'), '1bffffffffffffffff')
+		assert.equal(encode(-(2n**64n)).toString('hex'), '3bffffffffffffffff')
+		assert.equal(decode(Buffer.from('3bffffffffffffffff', 'hex')), -(2n**64n))
+	})
 
 	test('buffers', function() {
 		var data = {

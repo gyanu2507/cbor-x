@@ -583,7 +583,7 @@ export class Encoder extends Decoder {
 					// use an unsigned int as long as it fits
 					target[position++] = 0x1b
 					targetView.setBigUint64(position, value)
-				} else if (value > -(BigInt(1)<<BigInt(64)) && value < 0) {
+				} else if (value >= -(BigInt(1)<<BigInt(64)) && value < 0) {
 					// if we can fit an unsigned int, use that
 					target[position++] = 0x3b
 					targetView.setBigUint64(position, -value - BigInt(1))
